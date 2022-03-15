@@ -1,15 +1,26 @@
 class Solution {
 public:
-    int countNegatives(vector<vector<int>>& grid) {
-        // linear search: time :O(N^2) and Space:(1)
-        int cnt = 0;
-        int n  = grid.size();
-        int m = grid[0].size();
-        for(int i= 0;i<n;i++){
-            for(int j =0;j<m;j++){
-                if(grid[i][j]<0)
-                    cnt++;
+    int countNegativeHelper(vector<int>&vec)
+    {
+        int low = 0;
+        int high = vec.size() - 1;
+        while(low <= high)
+        {
+            int mid = low + (high-low) / 2;
+            if(vec[mid] >=0){
+                low = mid+1;
+            }else{
+                high = mid-1;
             }
+        }
+        return vec.size() - high -1;
+    }
+public:
+    int countNegatives(vector<vector<int>>& grid) {
+        // using binary search:
+        int cnt = 0;
+        for(int i = 0;i<grid.size();i++){
+            cnt += countNegativeHelper(grid[i]);
         }
         return cnt;
     }
