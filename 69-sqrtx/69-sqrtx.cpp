@@ -1,7 +1,7 @@
 class Solution {
 public:
     int mySqrt(int x) {
-        //usign binary search:
+        //usign binary search: Time ; (log sqrt(x)) and space: O(1)
         long long  start = 0, end = INT_MAX, ans = 0;
         while(start <= end)
         {
