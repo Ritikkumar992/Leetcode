@@ -1,12 +1,18 @@
 class Solution {
 public:
     int mySqrt(int x) {
-        // linear Search: TIme: O(sqrt(x)) and Spae:O(1)
-        long long y = 0;
-        while(y*y <= x){
-            y++;
+        //usign binary search:
+        long long  start = 0, end = INT_MAX, ans = 0;
+        while(start <= end)
+        {
+            long long m  = start + (end-start) / 2;
+            if(m*m <= x){
+                ans = m;
+                start = m+1;
+            }else{
+                end = m-1;
+            }
         }
-        return y-1;
-        
+        return ans;
     }
 };
