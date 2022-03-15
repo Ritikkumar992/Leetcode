@@ -1,13 +1,17 @@
 class Solution {
 public:
     int peakIndexInMountainArray(vector<int>& arr) {
-        // linear Search: Time :O(N)
-        int mx = *max_element(arr.begin(),arr.end());
-        
-        for(int i = 0;i<arr.size();i++){
-            if(arr[i] == mx)
-                return i;
+        //Optimized Approach : O(log(n))
+        int low = 0, high = arr.size()-1;
+        while(low<high){
+            int mid = low + (high-low)/2;
+            if(arr[mid] < arr[mid+1]){
+                low = mid+1;
+            }
+            else{
+                high = mid;
+            }
         }
-        return -1;
+        return low;
     }
 };
