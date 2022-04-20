@@ -1,21 +1,25 @@
 class Solution {
+    // Time : O(2^n * n) and space: O(2^n) * O(k)
 public:
-    vector<vector<int> > subsetsWithDup(vector<int> &S) {
-        vector<vector<int> > totalset = {{}};
-        sort(S.begin(),S.end());
-        for(int i=0; i<S.size();){
-            int count = 0; // num of elements are the same
-            while(count + i<S.size() && S[count+i]==S[i])  count++;
-            int previousN = totalset.size();
-            for(int k=0; k<previousN; k++){
-                vector<int> instance = totalset[k];
-                for(int j=0; j<count; j++){
-                    instance.push_back(S[i]);
-                    totalset.push_back(instance);
-                }
-            }
-            i += count;
+    void findSubset(int ind, vector<int>&nums, vector<int>&ds, vector<vector<int>>&ans)
+    {
+        ans.push_back(ds);
+        for(int i = ind;i<nums.size();i++)
+        {
+            if(i != ind && nums[i] == nums[i-1])
+                continue;
+            ds.push_back(nums[i]);
+            findSubset(i+1,nums,ds, ans);
+            ds.pop_back();
         }
-        return totalset;
-        }
+    }
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        // creating ans vector to store our ans.
+        vector<vector<int>> ans;
+        vector<int> ds;
+        sort(nums.begin(),nums.end());
+        findSubset(0,nums,ds,ans);
+        return ans;
+    }
 };
