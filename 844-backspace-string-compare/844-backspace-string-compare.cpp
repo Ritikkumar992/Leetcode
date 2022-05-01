@@ -1,35 +1,26 @@
 class Solution {
 public:
     bool backspaceCompare(string s, string t) {
-        // Using Stack:
-        stack<int> s1, s2;
-        string str1, str2;
-        for(auto i:s){
-            if(i == '#' && !s1.empty()){
-                s1.pop();
-            }
-             else if(i != '#'){
-                s1.push(i);
-             }
-        }
-        for(auto i:t){
-            if(i == '#' && !s2.empty()){
-                s2.pop();
-            }
-            else if(i != '#'){
-                s2.push(i);
-             }
-        }
-        while(!s1.empty())
+        //Using Two pointer approach: TIme : O(1) and Space:O(n)
+        string res1 = "", res2 = "";
+        int i = 0;
+        while(s[i] != '\0')
         {
-            str1.push_back(s1.top());
-            s1.pop();
+            if(s[i] >= 'a' and s[i] <= 'z')
+                res1 += s[i];
+            else if(!res1.empty())
+                res1.pop_back();
+            i++;
         }
-        while(!s2.empty())
+        int j = 0;
+        while(t[j] != '\0')
         {
-            str2.push_back(s2.top());
-            s2.pop();
+            if(t[j] >= 'a' and t[j] <= 'z')
+                res2 += t[j];
+            else if(!res2.empty())
+                res2.pop_back();
+            j++;
         }
-        return str1 == str2;
+        return res1 == res2;
     }
 };
