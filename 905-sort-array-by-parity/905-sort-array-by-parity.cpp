@@ -1,20 +1,13 @@
 class Solution {
 public:
     vector<int> sortArrayByParity(vector<int>& nums) {
-        // Brute force:
-        vector<int> ans;
-        for(int i =0;i<nums.size();i++)
+        //In-place : Time : O(N)
+        for(int i = 0, j = 0;j<nums.size();j++)
         {
-            if(nums[i]%2 == 0){
-                ans.push_back(nums[i]);
+            if(nums[j] %2 == 0){
+                swap(nums[i++], nums[j]);
             }
         }
-        for(int i =0;i<nums.size();i++)
-        {
-            if(nums[i]%2 != 0){
-                ans.push_back(nums[i]);
-            }
-        }
-        return ans;
+        return nums;
     }
 };
