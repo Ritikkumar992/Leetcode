@@ -1,6 +1,7 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
+        //Time:O(n) and Space:O(1)
         int min_price = INT_MAX;
         int max_profit = 0;
         
