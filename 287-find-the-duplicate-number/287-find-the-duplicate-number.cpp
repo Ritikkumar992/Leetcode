@@ -1,14 +1,18 @@
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
-        //Approach 02: using Set but doesn't work in constant space:
-        unordered_set<int> seen;
-        for(auto &i:nums)
+        //Approach 03: Negative Marking:
+        int duplicate = -1;
+        for(int i = 0;i<nums.size();i++)
         {
-            if(seen.count(i))
-                return i;
-            seen.insert(i);
+            int cur = abs(nums[i]);
+            if(nums[cur] < 0){
+                duplicate = cur;
+                break;
+            }
+            nums[cur] *= -1;
         }
-        return -1;
+        
+        return duplicate;
     }
 };
