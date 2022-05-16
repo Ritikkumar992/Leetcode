@@ -1,11 +1,13 @@
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
+        //Approach 02: using Set but doesn't work in constant space:
         unordered_set<int> seen;
-        for(auto &num: nums){
-            if(seen.count(num))
-                return num;
-            seen.insert(num);
+        for(auto &i:nums)
+        {
+            if(seen.count(i))
+                return i;
+            seen.insert(i);
         }
         return -1;
     }
