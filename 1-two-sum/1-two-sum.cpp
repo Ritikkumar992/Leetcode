@@ -1,18 +1,22 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        //Approach_01: Using two for loop:
-        vector<int> ans;
-        for(int i=0;i<nums.size();i++)
+        //Using HashSet: Time: O(n)
+        vector<int>res;
+        unordered_map<int,int> mp;
+        
+        for(int i = 0;i<nums.size();i++)
         {
-            for(int j = i+1;j<nums.size();j++)
+            if(mp.find(target-nums[i]) != mp.end())
             {
-                if(nums[i]+nums[j] == target){
-                    ans.push_back(i);
-                    ans.push_back(j);
-                }
+                res.emplace_back(mp[target-nums[i]]);
+                res.emplace_back(i);
+                return res;
+            }
+            else{
+                mp[nums[i]] = i;
             }
         }
-        return ans;
+        return res;
     }
 };
