@@ -1,18 +1,16 @@
 class Solution {
-    int dp[31];
-    int helper(int n)
-    {
-        if(n<=1)
-            return n;
-        if(dp[n] != -1)
-            return dp[n];
-        return dp[n] = helper(n-1)+helper(n-2);
-    }
 public:
     int fib(int n) {
-        //Recursion to Memoization : Time : O(n) and SPace: O(n)+O(n)
-        memset(dp,-1,sizeof(dp));
-        int ans = helper(n);
-        return ans;
+        //Space Optimization:
+        //Recursion to Tabulation : Time : O(n) and Space:O(1)
+        if(n<=1)
+            return n;
+        int prev2 = 0, prev1 = 1;
+        for(int i = 2;i<=n;i++){
+            int cur = prev2 + prev1;
+            prev2 = prev1;
+            prev1 = cur;
+        }
+        return prev1;
     }
 };
