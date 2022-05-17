@@ -1,18 +1,12 @@
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
-        //Approach_03: using two-pointer 
-        int i = 0; // lastnon-zero index;
-        //put all the non zero ele at the begining:
-        for(auto it:nums){
-            if(it != 0){
-                nums[i] = it;
+        //Most Optimal:
+        for(int i = 0,j = 0;j<nums.size();j++){
+            if(nums[j] != 0){
+                swap(nums[i],nums[j]);
                 i++;
-            }
-        }
-        //fill the remaining array with 0's
-        for(int x = i;x<nums.size();x++){
-            nums[x] = 0;
+            }   
         }
     }
 };
