@@ -1,22 +1,18 @@
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
-        //Approach_02: Space-optimal:
-        int cnt0 = 0;
+        //Approach_03: using two-pointer 
+        int i = 0; // lastnon-zero index;
+        //put all the non zero ele at the begining:
         for(auto it:nums){
-            if(it == 0)
-                cnt0++;
+            if(it != 0){
+                nums[i] = it;
+                i++;
+            }
         }
-        // retain the original position of non-zero element;
-        vector<int>res;
-        for(auto it:nums){
-            if(it != 0)
-                res.push_back(it);
+        //fill the remaining array with 0's
+        for(int x = i;x<nums.size();x++){
+            nums[x] = 0;
         }
-        //move all zeroes to the end:
-        while(cnt0--){
-            res.push_back(0);
-        }
-        nums = res;
     }
 };
