@@ -1,18 +1,18 @@
 class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {
-        //Brute force: Time : O(n*n)
+        //Optimized Approach: Time:O(n*n) and Space:O(1)
         int n = matrix.size();
-        vector<vector<int>> dummy(n,vector<int>(n,0));
+        
+        // step1: transpose a matrix:
         for(int i = 0;i<n;i++){
-            for(int j = 0;j<n;j++){
-                dummy[j][n-i-1] = matrix[i][j];
+            for(int j = 0;j<i;j++){
+                swap(matrix[i][j],matrix[j][i]);
             }
         }
+        // step2: reverse each row:
         for(int i = 0;i<n;i++){
-            for(int j = 0;j<n;j++){
-                 matrix[i][j] = dummy[i][j];
-            }
+            reverse(matrix[i].begin(),matrix[i].end());
         }
     }
 };
