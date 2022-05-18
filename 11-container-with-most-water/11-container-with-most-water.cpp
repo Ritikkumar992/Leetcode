@@ -1,22 +1,23 @@
 class Solution {
 public:
     int maxArea(vector<int>& height) {
-        // TIme: O(N)
-        int i =0 , j = height.size()-1;
-        int water = 0;
-        
+        //Optimized Approach: Time:O(n) and Space:O(1)
+        int n = height.size();
+        int i = 0, j= n-1;
+        int mx = 0;
         while(i<j)
         {
-            int ht = min(height[i],height[j]);
-            int wt = j-i;
+            int length = min(height[i],height[j]);
+            int width = j-i;
+            int area = length*width;
+            mx = max(area, mx);
             
-            water = max(water, ht*wt);
-            
-            if(height[i] <= height[j])
+            if(height[i]<=height[j]){
                 i++;
-            else
+            }else{
                 j--;
+            }
         }
-        return water;
+        return mx;
     }
 };
