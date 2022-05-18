@@ -1,22 +1,15 @@
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        // Better Approach since column is not sorted...
-        // Time : O(N)
-        int m = matrix.size();
-        int n = matrix[0].size();
-        
-        int i =0, j = n-1;
-        while(i<m && j>=0)
-        {
-            if(matrix[i][j] == target)
-                return true;
-            else if(matrix[i][j] > target)
-                 j--;
-            else{
-                i++;
+        //Brute force:
+        int n = matrix.size();
+        int m = matrix[0].size();
+        for(int i = 0;i<n;i++){
+            for(int j = 0;j<m;j++){
+                if(matrix[i][j] == target)
+                    return true;
             }
-         }
+        }
         return false;
     }
 };
