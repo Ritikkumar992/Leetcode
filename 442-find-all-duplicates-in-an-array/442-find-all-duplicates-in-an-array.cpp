@@ -1,16 +1,14 @@
 class Solution {
 public:
     vector<int> findDuplicates(vector<int>& nums) {
-        //Approach_02: Using HashMap:
-        map<int,int>mp;
-        for(auto it:nums){
-            mp[it]++;
+        //Time:O(n) and Space:O(1)
+        if(nums.empty())return {};
+        vector<int>ans;
+        for(int i=0;i<nums.size();i++){
+            if(nums[abs(nums[i])-1]<0)
+                ans.push_back(abs(nums[i]));
+            nums[abs(nums[i])-1]=-nums[abs(nums[i])-1];
         }
-        vector<int>res;
-        for(auto it:mp){
-            if(it.second == 2)
-                res.push_back(it.first);
-        }
-        return res;
+        return ans;
     }
 };
