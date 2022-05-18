@@ -1,12 +1,15 @@
 class Solution {
 public:
     vector<int> findDuplicates(vector<int>& nums) {
-        // Approach_01: using sorting: Time:O(nlogn) and Space:O(n)
-        sort(nums.begin(),nums.end());
+        //Approach_02: Using HashMap:
+        map<int,int>mp;
+        for(auto it:nums){
+            mp[it]++;
+        }
         vector<int>res;
-        for(int i =0;i<nums.size()-1;i++){
-            if(nums[i] == nums[i+1])
-                res.push_back(nums[i]);
+        for(auto it:mp){
+            if(it.second == 2)
+                res.push_back(it.first);
         }
         return res;
     }
