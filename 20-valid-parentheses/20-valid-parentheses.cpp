@@ -1,23 +1,26 @@
 class Solution {
 public:
     bool isValid(string s) {
+        //Approach _01: Using Stack Time: O(n) and Space:O(1)
         stack<char> st;
-        for(char c: s){
-            if(c == '(' || c == '{' || c == '['){
+        for(auto c:s){
+            if(c == '(' || c == '[' || c == '{')
                 st.push(c);
-            }
-            else{
+            else
+            {
                 if(st.empty())
                     return false;
-                if(c == ')' && st.top() != '(') 
-                      return false;
-                if(c == '}' && st.top() != '{') 
-                      return false;
-                if(c == ']' && st.top() != '[') 
-                      return false;
+                if(c == ')' && st.top() != '(')
+                    return false;
+                if(c == '}' && st.top() != '{')
+                    return false;
+                if(c == ']' && st.top() != '[')
+                    return false;
                 st.pop();
             }
         }
-        return st.empty();
+        if(st.empty())
+            return true;
+        return false;
     }
 };
