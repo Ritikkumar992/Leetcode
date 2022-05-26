@@ -1,13 +1,12 @@
 class Solution {
 public:
     int hammingWeight(uint32_t n) {
-        //Approach_01: 
+        //Approach_02: no of iteration is equal to no of set bits 
         int cnt = 0;// count the set bits
         while(n>0) // iterate until all bits are traversed;
         {
-            if((n&1)>0) // check the parity of first bit from the right;
-                cnt++;
-            n = n>>1; // shift one bit to the right;
+            ++cnt;
+            n = n&(n-1); // change the first set bit from right to 0.
         }
         return cnt;
     }
