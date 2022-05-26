@@ -10,12 +10,14 @@ class Solution {
     }
 public:
     bool isHappy(int n) {
-        //Appraoch_01: Time:O(nlogn) and Space:O(nlogn)
-        set<int> seen;
-        while(n != 1 && !seen.count(n)){
-            seen.insert(n);
-            n = getNext(n);
+        //Appraoch_02: Time:O(nlogn) and Space:O(1)
+        int slower  = n;
+        int faster = getNext(n);
+        while(faster != 1 && slower != faster)
+        {
+            slower = getNext(slower);
+            faster = getNext(getNext(faster));
         }
-        return n == 1;
+        return faster == 1;
     }
 };
