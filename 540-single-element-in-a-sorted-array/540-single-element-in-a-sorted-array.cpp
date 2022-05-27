@@ -1,15 +1,11 @@
 class Solution {
 public:
     int singleNonDuplicate(vector<int>& nums) {
-        // Approach_02: Using Map: -> Time:O(nlogn) and Space:O(n)
-        unordered_map<int,int> mp;
-        for(auto it:nums){
-            mp[it]++;
+        // Approach_03: Using XOr operation -> Time:O(n) and Space:O(1)
+        int ele = 0;
+        for(int i = 0;i<nums.size();i++){
+            ele = ele^nums[i];
         }
-        for(auto i:mp){
-            if(i.second  == 1)
-                return i.first;
-        }
-        return -1;
+        return ele;
     }
 };
