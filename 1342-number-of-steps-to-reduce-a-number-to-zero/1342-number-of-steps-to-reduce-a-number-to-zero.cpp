@@ -1,12 +1,12 @@
 class Solution {
 public:
     int numberOfSteps(int num) {
-        //Brute force: Time:O(N) and Space:0(1)
+        //Using Bit Manipulation;
         int cnt = 0;
         while(num != 0)
         {
-            if(num%2 == 0)
-                num /= 2;
+            if((num&1) != 1)
+                num = num>>1;
             else
                 num -= 1;
             cnt++;
