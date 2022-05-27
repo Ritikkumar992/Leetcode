@@ -1,12 +1,11 @@
 class Solution {
 public:
     int findPeakElement(vector<int>& nums) {
-        int mx = *max_element(nums.begin(),nums.end());
-        for(int i =0;i<nums.size();i++){
-            if(nums[i] == mx)
+        int n = nums.size();
+        for(int i = 0;i<n-1;i++){
+            if(nums[i] > nums[i+1])
                 return i;
-            
         }
-        return -1;
+        return n-1;
     }
 };
