@@ -1,12 +1,15 @@
 class Solution {
 public:
     int findPeakElement(vector<int>& nums) {
-        //Approach_01:Linear Scan: Time:O(n) and Space:O(1)
-        int n = nums.size();
-        for(int i = 0;i<n-1;i++){
-            if(nums[i] > nums[i+1])
-                return i;
+        //Approach_02:  Binary Apporach:Time:O(logn) and Space:O(1)
+        int l = 0, r = nums.size() - 1;
+        while (l < r) {
+            int mid = (l + r) / 2;
+            if (nums[mid] > nums[mid + 1])
+                r = mid;
+            else
+                l = mid + 1;
         }
-        return n-1;
+        return l;
     }
 };
