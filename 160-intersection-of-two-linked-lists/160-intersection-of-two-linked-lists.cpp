@@ -9,19 +9,22 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        //Using HashTable: Time:O(n+m) and Space:O(n)
-        unordered_set<ListNode*> st;
-        while(headA != NULL)
+        //Using Difference of length: 
+        //Time :  O(2*max(length of list1,length of list2)) , space: O(1)
+        ListNode* d1 = headA;
+        ListNode* d2 = headB;
+        
+        while(d1 != d2)
         {
-            st.insert(headA);
-            headA = headA->next;
+            if(d1 == NULL)
+                d1 = headB;
+            else
+                d1 = d1->next;
+            if(d2 == NULL)
+                d2 = headA;
+            else
+                d2 = d2->next;
         }
-        while(headB != NULL)
-        {
-            if(st.find(headB) != st.end())
-                return headB;
-            headB = headB->next;
-        }
-        return NULL;
+        return d1;
     }
 };
