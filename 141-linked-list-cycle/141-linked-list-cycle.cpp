@@ -9,15 +9,16 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        //Using HashSet: Time:O(n) and Space:O(n)
-        unordered_set<ListNode*> st;
-        while(head != NULL)
-        {
-            if(st.find(head) != st.end())
-                return true;
-            else
-                st.insert(head);
-            head = head->next;
+        //Using SLow and Fast Pointer : Time:O(n) and Space:O(1)
+        if(head == NULL)
+            return false;
+        ListNode* fast = head;
+        ListNode* slow = head;
+        
+        while(fast->next != NULL && fast->next->next != NULL){
+            fast = fast->next->next;
+            slow = slow->next;
+            if(fast == slow) return true;
         }
         return false;
     }
