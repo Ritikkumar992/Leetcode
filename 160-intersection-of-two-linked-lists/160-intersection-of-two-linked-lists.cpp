@@ -8,18 +8,19 @@
  */
 class Solution {
 public:
-    ListNode *getIntersectionNode(ListNode *head1, ListNode *head2) {
-        //Brute force:
-        while(head2 != NULL)
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        //Using HashTable: Time:O(n+m) and Space:O(n)
+        unordered_set<ListNode*> st;
+        while(headA != NULL)
         {
-            ListNode* temp = head1;
-            while(temp != NULL)
-            {
-                if(temp == head2)
-                    return head2;
-                temp = temp->next;
-            }
-            head2 = head2->next;
+            st.insert(headA);
+            headA = headA->next;
+        }
+        while(headB != NULL)
+        {
+            if(st.find(headB) != st.end())
+                return headB;
+            headB = headB->next;
         }
         return NULL;
     }
