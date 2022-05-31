@@ -9,7 +9,7 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        //Using set;
+        //Using HashSet: Time:O(n) and Space:O(n)
         unordered_set<ListNode*> st;
         while(head != NULL)
         {
