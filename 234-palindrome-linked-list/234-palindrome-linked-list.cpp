@@ -9,19 +9,47 @@
  * };
  */
 class Solution {
+    // function to reverse the linked list:
+    ListNode* reverse(ListNode* ptr) {
+    ListNode* pre=NULL;
+    ListNode* nex=NULL;
+    while(ptr!=NULL) {
+        nex = ptr->next;
+        ptr->next = pre;
+        pre=ptr;
+        ptr=nex;
+    }
+    return pre;
+}
+    
 public:
     bool isPalindrome(ListNode* head) {
-        //Approach_01: Using Extra Space: Time:O(n) and Space:O(n)
-        vector<int> res;
-        while(head != NULL){
-            res.push_back(head->val);
-            head = head->next;
-        }
-        int n = res.size();
-        for(int i = 0;i<n/2;i++)
+        //Without using Extra Space:
+        //TIme;O(N/2)+O(N/2)+O(N/2) and Space: O(1)
+        
+        //Step 1: Getting the middle element of the list;
+        ListNode* fast = head;
+        ListNode* slow = head;
+        
+        while(fast->next != NULL && fast->next->next != NULL)
         {
-            if(res[i] != res[n-i-1])
+            fast = fast->next->next;
+            slow = slow->next;
+        }
+        //Traversing the list from the next element of the slow pointer.
+        slow->next = reverse(slow->next);
+        
+        //Step3: iterate throught the list until the dummy doesn't reaches end, and 
+        // create a dummy node to check if they are same element or not.
+        slow = slow->next;
+        ListNode* dummy = head;
+        
+        while(slow != NULL)
+        {
+            if(slow->val != dummy->val)
                 return false;
+            slow = slow->next;
+            dummy = dummy->next;
         }
         return true;
     }
