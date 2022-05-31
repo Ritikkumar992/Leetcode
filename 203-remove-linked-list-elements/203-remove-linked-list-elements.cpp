@@ -11,20 +11,17 @@
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
-        //Approach_01: Using two pointer: Time;O(n) and space:O(1)
+        //Approach_02: Using One pointer: Time;O(n) and space:O(1)
         if(head==NULL) return head;
         while(head!=NULL && head->val==val){
             head = head->next;
         }
         ListNode* curr = head;
-        ListNode* prev = NULL;
-        while(curr!=NULL){
-            if(curr->val==val){
-                prev->next = curr->next;
-                curr = curr->next;
+        while(curr!=NULL && curr->next != NULL){
+            if(curr->next->val==val){
+                curr->next = curr->next->next;
             }
             else{
-                prev = curr;
                 curr = curr->next;        
             }
         }
