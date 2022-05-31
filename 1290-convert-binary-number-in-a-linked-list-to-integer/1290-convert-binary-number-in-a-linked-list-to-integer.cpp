@@ -11,19 +11,13 @@
 class Solution {
 public:
     int getDecimalValue(ListNode* head) {
-        //Using a vector.
-        vector<int> res;
-        while(head != NULL)
+        //Binary Representation: Time:O(n) and SPace:O(n)
+        int num = head->val;
+        while(head -> next != NULL)
         {
-            res.push_back(head->val);
+            num = num*2 + head->next->val;
             head = head->next;
         }
-        int ans = 0;
-        int j  = 0;
-        for(int i = res.size()-1;i>=0;i--){
-            ans += res[i]*pow(2,j);
-            j++;
-        }
-        return ans;
+        return num;
     }
 };
