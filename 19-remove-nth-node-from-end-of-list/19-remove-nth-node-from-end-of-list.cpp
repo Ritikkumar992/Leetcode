@@ -11,20 +11,21 @@
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        //Approach_01: Single Traversal : Time:O(n) and Space:O(1)
-        int len = 0, i=1;
-        ListNode* temp = head;
-        while(temp != NULL)
+        //Approach_02: Slow and fast pointer Approach: Time:O(n) and Space:O(1)
+        ListNode* start = new ListNode();
+        start -> next = head;
+        ListNode* fast = start;
+        ListNode* slow  = start;
+        
+        for(int i = 1;i<=n;i++){
+            fast = fast->next;
+        }
+        while(fast -> next != NULL)
         {
-            temp = temp->next;
-            len++;
+            fast = fast->next;
+            slow = slow->next;
         }
-        if(len == n)
-            return head->next;
-        for(temp = head; i<len-n;i++){
-            temp = temp->next;
-        }
-        temp->next = temp->next->next;
-        return head;
+        slow -> next = slow->next->next;
+        return start->next;
     }
 };
