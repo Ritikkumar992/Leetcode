@@ -13,22 +13,23 @@ public:
     }
 };
 */
+
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        map<Node*, Node*> m;
-        int i=0;
+        //Using HashMap: Time:O(2n) and Space:O(n)
+        map<Node*, Node*> mp;
         Node* ptr = head;
-        while (ptr) {
-            m[ptr] =new Node(ptr->val);
+        while(ptr){
+            mp[ptr] = new Node(ptr->val);
             ptr = ptr->next;
         }
         ptr = head;
-        while (ptr) {
-            m[ptr]->next = m[ptr->next];
-            m[ptr]->random = m[ptr->random];
+        while(ptr){
+            mp[ptr]->next = mp[ptr->next];
+            mp[ptr]->random = mp[ptr->random];
             ptr = ptr->next;
         }
-        return m[head];
+        return mp[head];
     }
 };
