@@ -1,26 +1,44 @@
 class Solution {
 public:
-    bool backspaceCompare(string s, string t) {
-        //Using Two pointer approach: TIme : O(1) and Space:O(n)
-        string res1 = "", res2 = "";
-        int i = 0;
-        while(s[i] != '\0')
-        {
-            if(s[i] >= 'a' and s[i] <= 'z')
-                res1 += s[i];
-            else if(!res1.empty())
-                res1.pop_back();
-            i++;
-        }
-        int j = 0;
-        while(t[j] != '\0')
-        {
-            if(t[j] >= 'a' and t[j] <= 'z')
-                res2 += t[j];
-            else if(!res2.empty())
-                res2.pop_back();
-            j++;
-        }
-        return res1 == res2;
+    bool backspaceCompare(string S, string T) {
+        // Using Stack: Time:O(n+m) and Space:O(n+m)
+         stack <int> s1,s2;
+         string str1,str2; 
+            
+         for(int i = 0; i < S.size(); i++){
+                 
+                 if(S[i] == '#' && !s1.empty())
+                         s1.pop();
+                 
+                 else if(S[i] != '#')
+                         s1.push(S[i]);
+                 
+         }
+         
+         for(int i = 0; i < T.size(); i++){
+                 
+                 if(T[i] == '#' && !s2.empty())
+                         s2.pop();
+                 
+                 else if(T[i] != '#')
+                         s2.push(T[i]);
+                 
+         }
+            
+         while(!s1.empty()){
+                 
+                 str1.push_back(s1.top());
+                 s1.pop();
+                 
+         }
+            
+         while(!s2.empty()){
+                 
+                 str2.push_back(s2.top());
+                 s2.pop();
+                 
+         }      
+            
+         return str1 == str2;   
     }
 };
