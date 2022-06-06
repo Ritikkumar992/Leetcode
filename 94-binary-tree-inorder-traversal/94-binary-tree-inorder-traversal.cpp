@@ -10,21 +10,27 @@
  * };
  */
 class Solution {
-    public:
-    //inorder => left -> root -> right
-    void dfs(TreeNode* root, vector<int>& inorder)
-    {
-        if(root == NULL)
-            return;
-        dfs(root->left, inorder);
-        inorder.push_back(root->val);
-        dfs(root->right,inorder);
-    }
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        //Recursive Approach: Time:O(n) and Space:O(n)
-        vector<int> inorder;
-        dfs(root, inorder);
+        //Approach_02: Using Stack: Time:O(n) and Space:O(n)
+        vector<int>inorder;
+        stack<TreeNode*>st;
+        TreeNode* node = root;
+        
+        while(true)
+        {
+            if(node != NULL){
+                st.push(node);
+                node = node->left;
+            }
+            else{
+                if(st.empty() == true) break;
+                node = st.top();
+                st.pop();
+                inorder.push_back(node->val);
+                node = node->right;
+            }
+        }
         return inorder;
     }
 };
