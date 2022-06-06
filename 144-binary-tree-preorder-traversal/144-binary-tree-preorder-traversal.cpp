@@ -10,21 +10,25 @@
  * };
  */
 class Solution {
-    //Preorder -> root -> left -> right;
-    void dfs(TreeNode* root, vector<int>& preorder)
-    {
-        if(root == NULL)
-            return;
-        preorder.push_back(root->val);
-        dfs(root->left, preorder);
-        dfs(root->right, preorder);
-        
-    }
 public:
     vector<int> preorderTraversal(TreeNode* root) {
-        //Approach_01: Using Recurison : Time:O(n) and Space:O(n)
+        //Approach_02: Using Stack : Time:O(n) and Space:O(n)
         vector<int> preorder;
-        dfs(root, preorder);
+        if(root == NULL)
+            return preorder;
+        stack<TreeNode*> st;
+        st.push(root);
+        while(!st.empty())
+        {
+            root = st.top();
+            st.pop();
+            preorder.push_back(root->val);
+            
+            if(root->right != NULL)
+                st.push(root->right);
+            if(root->left != NULL)
+                st.push(root->left);
+        }
         return preorder;
     }
 };
