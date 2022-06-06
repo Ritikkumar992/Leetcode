@@ -10,20 +10,26 @@
  * };
  */
 class Solution {
-    //Postorder -> left -> right-> root;
-    void dfs(TreeNode* root, vector<int>&postorder)
-    {
-        if(root == NULL)
-            return;
-        dfs(root->left, postorder);
-        dfs(root->right,postorder);
-        postorder.push_back(root->val);
-    }
 public:
     vector<int> postorderTraversal(TreeNode* root) {
-        //Approach_01: Using Recursion: Time:O(n) and Space:O(n)
-        vector<int> postorder;
-        dfs(root, postorder);
-        return postorder;
+        vector<int> nodes;
+        stack<TreeNode*> todo;
+        TreeNode* last = NULL;
+        while (root || !todo.empty()) {
+            if (root) {
+                todo.push(root);
+                root = root -> left;
+            } else {
+                TreeNode* node = todo.top();
+                if (node -> right && last != node -> right) {
+                    root = node -> right;
+                } else {
+                    nodes.push_back(node -> val);
+                    last = node;
+                    todo.pop();
+                }
+            }
+        }
+        return nodes;
     }
 };
