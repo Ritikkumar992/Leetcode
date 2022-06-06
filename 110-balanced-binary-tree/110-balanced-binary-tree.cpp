@@ -11,23 +11,23 @@
  */
 class Solution {
 public:
-    bool ans;
-    int checkBalance(TreeNode* root){
-        if(!root)
-            return 0;
-        if(!ans) // if Answer is already False then return it.
-            return 0;
-        int leftSubTree = checkBalance(root->left);
-        int rightSubTree = checkBalance(root->right);
-        if(abs(leftSubTree-rightSubTree) > 1){
-            ans = false;
-        }
-        return 1 + max(leftSubTree, rightSubTree);
+    bool isBalanced(TreeNode* root) {
+        //Approach_02: Using Recurison: Time:O(n) and Space:O(n)
+        return dfsHeight(root) != -1;
     }
-    bool isBalanced(TreeNode* root){
-        //Brute force:Time:O(n^2)
-        ans = true;
-        int temp = checkBalance(root);
-        return ans;
+    int dfsHeight(TreeNode* root)
+    {
+        if(root == NULL)
+            return 0;
+        int leftHeight = dfsHeight(root->left);
+        if(leftHeight == -1)
+            return -1;
+        int rightHeight = dfsHeight(root->right);
+        if(rightHeight == -1)
+            return -1;
+        
+        if(abs(leftHeight - rightHeight) > 1)
+            return -1;
+        return max(leftHeight, rightHeight) +1;
     }
 };
