@@ -9,18 +9,23 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        //Using HashSet: Time:O(n+m) and Space:O(n)
-        unordered_set<ListNode*> st;
-        while(headB != NULL){
-            st.insert(headB);
-            headB = headB->next;
-        }
-        while(headA != NULL)
+        //ApproacH-03: Using Difference of length:
+        //Time:O(2*max(length of list1, length of list2)) and Space:O(1)
+        
+        ListNode* d1 = headA;
+        ListNode* d2 = headB;
+        
+        while(d1 != d2)
         {
-            if(st.find(headA) != st.end())
-                return headA;
-            headA = headA->next;
+            if(d1 == NULL)
+                d1 = headB;
+            else
+                d1 = d1->next;
+            if(d2 == NULL)
+                d2 = headA;
+            else
+                d2 = d2->next;
         }
-        return NULL;
+        return d1;
     }
 };
