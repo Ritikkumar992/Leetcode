@@ -9,22 +9,18 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        //Using Difference of length: 
-        //Time :  O(2*max(length of list1,length of list2)) , space: O(1)
-        ListNode* d1 = headA;
-        ListNode* d2 = headB;
-        
-        while(d1 != d2)
+        //Brute force:
+        while(headB != NULL)
         {
-            if(d1 == NULL)
-                d1 = headB;
-            else
-                d1 = d1->next;
-            if(d2 == NULL)
-                d2 = headA;
-            else
-                d2 = d2->next;
+            ListNode* temp = headA;
+            while(temp != NULL)
+            {
+                if(temp == headB)
+                    return headB;
+                temp = temp->next;
+            }
+            headB = headB->next;
         }
-        return d1;
+        return NULL;
     }
 };
