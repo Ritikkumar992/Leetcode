@@ -1,17 +1,22 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        //Using Two Pointer : TIme:O(n) and SPace:O(1)
-        int i = 0, j = nums.size()-1;
-        while(i<j)
+        //Using HashSet: Time: O(n)
+        vector<int>res;
+        unordered_map<int,int> mp;
+        
+        for(int i = 0;i<nums.size();i++)
         {
-            if(nums[i]+nums[j] == target)
-                return {i+1,j+1};
-            else if(nums[i]+nums[j] > target)
-                j--;
-            else
-                i++;
+            if(mp.find(target-nums[i]) != mp.end())
+            {
+                res.emplace_back(mp[target-nums[i]]+1);
+                res.emplace_back(i+1);
+                return res;
+            }
+            else{
+                mp[nums[i]] = i;
+            }
         }
-        return {};
+        return res;
     }
 };
