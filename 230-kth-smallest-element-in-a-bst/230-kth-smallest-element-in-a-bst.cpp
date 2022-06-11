@@ -10,24 +10,19 @@
  * };
  */
 class Solution {
-    // Time : O(height) and Space : O(height).
-    int solve(TreeNode* root, int &k){
-        if(!root){
-            return 0;
-        }
-        int left = solve(root->left,k);
-        if(left){
-            return left;
-        }
-        k -= 1;
-        if(k == 0){
-            return root->val;
-        }
-        int right = solve(root->right, k);
-        return right;
+    void dfs(TreeNode* node,vector<int>& inorder)
+    {
+        if(node == NULL)
+            return;
+        dfs(node->left, inorder);
+        inorder.push_back(node->val);
+        dfs(node->right, inorder);
     }
 public:
     int kthSmallest(TreeNode* root, int k) {
-        return solve(root, k);
+        //Approach_01: Using Inorder Technique:
+        vector<int> inorder;
+        dfs(root, inorder);
+        return inorder[k-1];
     }
 };
