@@ -10,20 +10,22 @@
  * };
  */
 class Solution {
-    void dfs(TreeNode* node,vector<int>& inorder)
-    {
-        if(node == NULL)
-            return;
-        dfs(node->left, inorder);
-        inorder.push_back(node->val);
-        dfs(node->right, inorder);
-    }
 public:
     int kthSmallest(TreeNode* root, int k) {
-        //Approach_01: Using IRecursive norder Technique: 
-        // Time:O(n) and Space:O(n)
+        //Approach_02: Using Iterative  Inorder Technique: 
+        // Time:O(h+k) and Space:O(h) --> h: height of BST
         vector<int> inorder;
-        dfs(root, inorder);
-        return inorder[k-1];
+        stack<TreeNode*> st;
+        while(true)
+        {
+            while(root != NULL){
+                st.push(root);
+                root = root->left;
+            }
+            root = st.top(); st.pop();
+            if(--k == 0)
+                return root->val;
+            root = root->right;
+        }
     }
 };
