@@ -20,7 +20,8 @@ class Solution {
     }
 public:
     int kthSmallest(TreeNode* root, int k) {
-        //Approach_01: Using Inorder Technique:
+        //Approach_01: Using IRecursive norder Technique: 
+        // Time:O(n) and Space:O(n)
         vector<int> inorder;
         dfs(root, inorder);
         return inorder[k-1];
