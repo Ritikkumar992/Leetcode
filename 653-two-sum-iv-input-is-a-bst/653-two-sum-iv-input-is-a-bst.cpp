@@ -12,26 +12,19 @@
 class Solution {
 public:
     bool findTarget(TreeNode* root, int k) {
-        //Approach_02: Using INorder Traversal: Time;O(n) and Space:O(n)
-        vector<int> nums;
-        inorder(root,nums);
-        
-        int i = 0, j = nums.size()-1;
-        while(i<j){
-            if(nums[i]+nums[j] == k)
-                return true;
-            else if(nums[i]+nums[j] > k)
-                j--;
-            else i++;
-        }
-        return false;
+        //Approach_03: Using Binary Seach on each node.
+        return dfs(root, root, k);
     }
-    void inorder(TreeNode* root, vector<int>& nums)
+    bool dfs(TreeNode* root, TreeNode* curr, int k)
     {
-        if(root == NULL)
-            return;
-        inorder(root->left, nums);
-        nums.push_back(root->val);
-        inorder(root->right, nums);
+        if(curr == NULL)
+            return false;
+        return search(root, curr, k-curr->val) || dfs(root, curr->left, k) || dfs(root, curr->right, k);
+    }
+     bool search(TreeNode* root, TreeNode *cur, int value){
+        if(root == NULL)return false;
+        return (root->val == value) && (root != cur) 
+            || (root->val < value) && search(root->right, cur, value) 
+                || (root->val > value) && search(root->left, cur, value);
     }
 };
