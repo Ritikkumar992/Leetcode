@@ -1,17 +1,29 @@
 class Solution {
 public:
-    int minimumTotal(vector<vector<int> > &triangle) {
-    int n = triangle.size();
-    vector<int> minlen(triangle.back());
-    for (int layer = n-2; layer >= 0; layer--) // For each layer
+    int helper(int i,int j,int n,vector<vector<int>> &triangle,vector<vector<int>> &dp)
     {
-        for (int i = 0; i <= layer; i++) // Check its every 'node'
-        {
-            // Find the lesser of its two children, and sum the current value in the triangle with it.
-            minlen[i] = min(minlen[i], minlen[i+1]) + triangle[layer][i]; 
-        }
+        // if i reached to bottom
+        if(i==n-1)
+            return triangle[i][j];
+        
+        // if already calculated
+        if(dp[i][j] != -1)
+            return dp[i][j];
+        
+        // I can move in two directions bottom (i+1,j) or bottom right (i+1,j+1)
+        // so try to move in both the directions with adding current cost
+        int move1 = triangle[i][j] + helper(i+1,j,n,triangle,dp);
+        int move2 = triangle[i][j] + helper(i+1,j+1,n,triangle,dp);
+        
+        // take min of both of them as given in the question
+        return dp[i][j] = min(move1,move2);
     }
-    return minlen[0];
-}
-
+    
+    int minimumTotal(vector<vector<int>>& triangle) 
+    {
+        int n = triangle.size();
+        vector<vector<int>> dp(n,vector<int>(n,-1));
+        
+        return helper(0,0,n,triangle,dp);
+    }
 };
