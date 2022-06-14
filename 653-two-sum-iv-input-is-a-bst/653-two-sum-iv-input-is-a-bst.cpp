@@ -12,17 +12,26 @@
 class Solution {
 public:
     bool findTarget(TreeNode* root, int k) {
-        unordered_set<int> st;
-        return dfs(root,k,st);
+        //Approach_02: Using INorder Traversal: Time;O(n) and Space:O(n)
+        vector<int> nums;
+        inorder(root,nums);
+        
+        int i = 0, j = nums.size()-1;
+        while(i<j){
+            if(nums[i]+nums[j] == k)
+                return true;
+            else if(nums[i]+nums[j] > k)
+                j--;
+            else i++;
+        }
+        return false;
     }
-    bool dfs(TreeNode* root, int k, unordered_set<int>&st)
+    void inorder(TreeNode* root, vector<int>& nums)
     {
         if(root == NULL)
-            return false;
-        if(st.count(k-root->val))
-            return true;
-        else
-            st.insert(root->val);
-        return dfs(root->left, k, st) || dfs(root->right, k, st);
+            return;
+        inorder(root->left, nums);
+        nums.push_back(root->val);
+        inorder(root->right, nums);
     }
 };
