@@ -10,25 +10,45 @@
  * };
  */
 class Solution {
-public:
-    vector<int> v;
-    int i=0;
-    void inorder(TreeNode* root){
-        if(!root) return;
+    // TIme : O(N) and Space: O(1)
+private:
+    TreeNode* first; // first violation.
+    TreeNode* prev; //last node of inorder.
+    TreeNode* middle;// adjacent node.
+    TreeNode* last; // second violation.
+private:
+    void inorder(TreeNode* root)
+    {
+        if(root == NULL)
+            return;
         inorder(root->left);
-        v.push_back(root->val);
+        
+        if(prev != NULL && (root->val < prev->val))
+        {
+            //if this is the first violation, mark these two nodes as 'first' and 'middle.
+            if(first == NULL){
+                first = prev;
+                middle = root;
+            }
+            // if this is second violation  mark this node as last.
+            else{
+                last = root;
+            }
+        }
+        //mark this node as previous.
+        prev = root;
         inorder(root->right);
     }
-    void check(TreeNode* root){
-        if(!root) return;
-        check(root->left);
-        if(v[i]!=root->val) swap(v[i],root->val);
-        i++;
-        check(root->right);
-    }
+public:
     void recoverTree(TreeNode* root) {
+        first = middle = last = NULL;
+        prev = new TreeNode(INT_MIN);
         inorder(root);
-        sort(v.begin(),v.end());
-        check(root);
+        if(first && last){
+            swap(first->val, last->val);
+        }
+        else if(first && middle){
+            swap(first->val, middle->val);
+        }
     }
 };
