@@ -7,12 +7,15 @@ public:
         for(int i =0;i<n-1;i++)
         {
             int diff = heights[i+1]-heights[i];
+            
             if(diff > 0)
                 min_heap.push(diff);
+            
             if(min_heap.size()>ladders){
                 bricks -= min_heap.top();
                 min_heap.pop();
             }
+            
             if(bricks < 0)
                 return i;
         }
