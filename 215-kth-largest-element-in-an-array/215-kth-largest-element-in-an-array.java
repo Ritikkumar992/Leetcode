@@ -5,8 +5,8 @@ class Solution {
         {
             min_heap.add(i);
             if(min_heap.size()>k)
-                min_heap.remove();
+                min_heap.poll();
         }
-        return min_heap.peek();
+        return min_heap.poll();
     }
 }
