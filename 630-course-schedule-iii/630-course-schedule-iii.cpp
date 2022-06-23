@@ -5,13 +5,9 @@ public:
           return v1[1] < v2[1];
       } 
     };
-    
-    /** Main Function ***/
     int scheduleCourse(vector<vector<int>>& courses) 
     {
         sort(courses.begin(), courses.end(), comparator());
-        
-        // Priority Queue by default sorted in ascending order
         priority_queue<int> q;
         
         int sum = 0;
@@ -19,16 +15,13 @@ public:
         {
             int t = c[0]; //Course time
             int d = c[1]; //Max day before which course has to be completed
-            
             q.push(t);
             sum += t;
-            
             if (sum > d)
             {
                 sum -= q.top(); //This can be some other long course
                 q.pop();
             }
-
         }
         return q.size();
     }
