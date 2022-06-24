@@ -1,10 +1,11 @@
 class Solution {
     public int findDuplicate(int[] nums) {
-        // Approach_01: Using Sorting : TIme:O(nlogn) and Space:O(nlogn)
-        Arrays.sort(nums);
-        for(int i = 1;i<nums.length;i++){
-            if(nums[i] == nums[i-1])
-                return nums[i];
+        // Approach_02: Using Set : TIme:O(n) and Space:O(n)
+        Set<Integer> st = new HashSet<>();
+        for(int num:nums){
+            if(st.contains(num))
+                return num;
+            st.add(num);
         }
         return -1;
     }
