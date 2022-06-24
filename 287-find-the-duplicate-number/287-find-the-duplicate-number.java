@@ -1,16 +1,22 @@
 class Solution {
     public int findDuplicate(int[] nums) {
-        // Approach_03: Using Negative marking : TIme:O(n) and Space:O(1)
+        // Approach_03: Using Binary Seacrh : TIme:O(nlogn) and Space:O(1)
+        int low = 0, high = nums.length;
         int duplicate = -1;
-        for(int i =0;i<nums.length;i++)
+        
+        while(low<=high)
         {
-            int cur = Math.abs(nums[i]);
-            if(nums[cur]<0){
-                duplicate = cur;
-                break;
+            int cur = (low+high)/2;
+            int cnt = 0;
+            for(int num:nums){
+                if(num <= cur)
+                    cnt++;
             }
-            else{
-                nums[cur] *= -1;
+            if(cnt > cur){
+                duplicate = cur;
+                high = cur-1;
+            }else{
+                low = cur+1;
             }
         }
         return duplicate;
