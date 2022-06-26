@@ -20,7 +20,7 @@ public:
     
     vector<vector<int>> subsets(vector<int>& nums) {
         vector<int> temp;       
-        sub(nums, 0, temp); // or sub(nums, 0, vector<int> {});
+        sub(nums, 0, temp);
         return ans;
     }
 };
