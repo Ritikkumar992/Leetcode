@@ -1,17 +1,22 @@
 class Solution {
 public:
     int maxScore(vector<int>& cardPoints, int k) {
-        //Using Sliding Window Techinique:
+        // Approach_02: Using Prefix Sum: Time:(2k) and Space:O(n)
         int n = cardPoints.size();
-        int i = 0, j = n-k;
+        vector<int>left(k+1), right(k+1);
+        left[0] = 0, right[0] = 0;
         
-        //initially sliding window's total sum = sum of the last k digits:
-        int total = accumulate(cardPoints.begin()+j, cardPoints.end(),0);
-        int best = total;
-        while(k--)
+        for(int i = 0;i<k;i++)
         {
-            best = max(best, total += cardPoints[i++] - cardPoints[j++]); 
+            left[i+1] = cardPoints[i]+left[i];
+            right[i+1] = cardPoints[n-i-1]+right[i];
         }
-        return best;
+        int mx = 0;
+        for(int i = 0;i<=k;i++)
+        {
+            int cur = left[i]+right[k-i];
+            mx = max(mx,cur);
+        }
+        return mx;
     }
 };
