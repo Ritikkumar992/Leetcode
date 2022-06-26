@@ -1,24 +1,19 @@
 class Solution {
     public int maxScore(int[] cardPoints, int k) {
-        // Approach_02: Using Prefix Sum: Time:(2k) and Space:O(n)
-        int n = cardPoints.length;
-        int []left = new int [k+1];
-        int []right = new int [k+1];
+        //Approach_03: Using Sliding window Technique: Time:O(k) and Space:O(1)
+        int sum = 0, n = cardPoints.length;
         
-        left[0] = 0;
-        right[0] = 0;
-        
-        for(int i = 0;i<k;i++)
-        {
-            left[i+1] = cardPoints[i]+left[i];
-            right[i+1] = cardPoints[n-i-1]+right[i];
+        // step1: Sum of first k elements: i.e sum of left window;
+        for(int i = 0;i<k;i++){
+            sum += cardPoints[i];
         }
-        int mx = 0;
-        for(int i = 0;i<=k;i++)
+        // Step2: substract the value from k-1 till 0 and add the value cardPoints[n+i-k]
+        int maxPoints = sum;
+        for(int i = k-1;i>=0;i--)
         {
-            int cur = left[i]+right[k-i];
-            mx = Math.max(mx,cur);
+            sum = sum - cardPoints[i]+cardPoints[n+i-k];
+            maxPoints = Math.max(maxPoints, sum);
         }
-        return mx;
+        return maxPoints;
     }
 }
