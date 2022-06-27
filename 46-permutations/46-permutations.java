@@ -1,27 +1,29 @@
 class Solution {
-    private void findPermutation(int[]nums,List<Integer>ds,boolean []freq,List<List<Integer>> ans){
-        // base case:
-        if(ds.size() == nums.length){
-            ans.add(new ArrayList<>(ds));
+    private void recurPermute(int index, int[] nums, List < List < Integer >> ans) {
+        if (index == nums.length) {
+            // copy the ds to ans
+            List<Integer>ds = new ArrayList<>();
+            for (int i=0;i<nums.length; i++) {
+                ds.add(nums[i]);
+            }
+            ans.add(new ArrayList < > (ds));
             return;
         }
-        // main logic:
-        for(int i= 0;i<nums.length;i++){
-            if(!freq[i]){
-                freq[i] = true;
-                ds.add(nums[i]);
-                findPermutation(nums,ds,freq,ans);
-                ds.remove(ds.size()-1);
-                freq[i] = false;
-            }
+        for (int i = index; i<nums.length; i++) {
+            swap(i, index, nums);
+            recurPermute(index + 1, nums, ans);
+            swap(i, index, nums);
         }
     }
+    private void swap(int i, int j, int[] nums) {
+        int t = nums[i];
+        nums[i] = nums[j];
+        nums[j] = t;
+    }
     public List<List<Integer>> permute(int[] nums) {
-        // Approach_01: Time:n!*n and Space:O(n)+O(n)
+        // TIme:O(n!*n) and Space:O(N)
         List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> ds = new ArrayList<>();
-        boolean []freq = new boolean[nums.length];
-        findPermutation(nums,ds,freq,ans);
+        recurPermute(0, nums, ans);
         return ans;
     }
 }
