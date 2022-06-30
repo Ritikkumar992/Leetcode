@@ -1,23 +1,29 @@
 class Solution {
     public void setZeroes(int[][] matrix) {
-        int row = matrix.length;
-        int col = matrix[0].length;
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int []dummy1 = new int[n];
+        int []dummy2 = new int[m];
+        for(int i= 0;i<n;i++){
+            dummy1[i] = -1;
+        }
+        for(int i = 0;i<m;i++){
+            dummy2[i] = -1;
+        }
         
-        Set<Integer> dummy1 = new HashSet<Integer>();
-        Set<Integer> dummy2 = new HashSet<Integer>();
-        
-        for(int i = 0;i<row;i++){
-            for(int j = 0;j<col;j++){
+        for(int i= 0;i<n;i++){
+            for(int j = 0;j<m;j++){
                 if(matrix[i][j] == 0){
-                    dummy1.add(i);
-                    dummy2.add(j);
+                    dummy1[i] = 0;
+                    dummy2[j] = 0;
                 }
             }
         }
-        for(int i = 0;i<row;i++){
-            for(int j =0;j<col;j++){
-                if(dummy1.contains(i)|| dummy2.contains(j))
+        for(int i =0;i<n;i++){
+            for(int j= 0;j<m;j++){
+                if(dummy1[i] == 0 || dummy2[j] == 0){
                     matrix[i][j] = 0;
+                }
             }
         }
     }
