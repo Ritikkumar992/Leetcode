@@ -1,34 +1,37 @@
 class Solution {
 public:
-    vector<int>vis,col;
-    bool dfs(int v, int c, vector<vector<int>>& graph){
-        vis[v]=1;
-        col[v]=c;
-        for(int child:graph[v]){
-            if(vis[child]==0){
-                // here c^1 is for flipping 1 by 0 or 0 by 1, that is flip the current color
-                if(dfs(child,c^1,graph)==false) 
-                    return false;
-            }
-            else{
-                if(col[v]==col[child])
+    bool checkBipartite(int i , vector<vector<int>>&graph, vector<int>visited)
+    {
+        queue<int>q;
+        q.push(i);
+        visited[i] = 1;
+        
+        while(!q.empty())
+        {
+            int node = q.front();
+            q.pop();
+            for(auto it:graph[node])
+            {
+                if(visited[it] == -1){
+                    visited[it] = 1-visited[node];
+                    q.push(it);
+                }
+                else if(visited[it] == visited[node])
                     return false;
             }
         }
         return true;
     }
-    
+public:
     bool isBipartite(vector<vector<int>>& graph) {
-        int n=graph.size();
-        vis.resize(n);
-        col.resize(n);
-
-        for(int i=0;i<n;++i){
-            if(vis[i]==0 && dfs(i,0,graph)==false){ 
-                return false;
+        int n = graph.size();
+        vector<int>visited(n+1,-1);
+        for(int i = 0;i<n;i++){
+            if(visited[i] == -1){
+                if(!checkBipartite(i,graph,visited))
+                    return false;
             }
         }
-        
         return true;
     }
 };
