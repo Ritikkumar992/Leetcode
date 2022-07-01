@@ -1,14 +1,24 @@
 class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {
-        // TIme:O(n*n) and soace: O(n*n)
+        // Time:O(n*m) and space;O(1)
+		// Transpose of the matrix; 
         int n = matrix.size();
-        vector<vector<int>> dummy(n,vector<int>(n,0));
-        for(int i = 0;i<n;i++){
-            for(int j = 0;j<n;j++){
-                dummy[j][n-i-1] = matrix[i][j];
+        for(int i=0; i<n; ++i) {
+            for(int j=i; j<n; ++j) {
+                swap(matrix[i][j], matrix[j][i]);
             }
         }
-        matrix = dummy;
+        for(int i=0; i<n; ++i) {
+		// 2 Pointer approach :  just like we do in 1D array we take left and right pointers
+		// and swap the values and then make those pointers intersect at some point.
+            int left = 0, right = n-1;
+            while(left < right) {
+                swap(matrix[i][left], matrix[i][right]);
+                ++left;
+                --right;
+            }
+        }
     }
+
 };
