@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<int> findDuplicates(vector<int>& nums) {
-        //Time:O(n) and Space:O(1)
+         //Time:O(n) and Space:O(1)
         if(nums.empty())return {};
         vector<int>ans;
         for(int i=0;i<nums.size();i++){
