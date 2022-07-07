@@ -1,18 +1,13 @@
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
-        //Approach 03: Negative Marking:
-        int duplicate = -1;
-        for(int i = 0;i<nums.size();i++)
-        {
-            int cur = abs(nums[i]);
-            if(nums[cur] < 0){
-                duplicate = cur;
-                break;
-            }
-            nums[cur] *= -1;
+        // Time:O(nlogn)+O(n) and space:O(n)
+        int n = nums.size();
+       sort(nums.begin(),nums.end());
+        for(int i = 0;i<n-1;i++){
+            if(nums[i] == nums[i+1])
+                return nums[i];
         }
-        
-        return duplicate;
+        return -1;
     }
 };
