@@ -1,19 +1,14 @@
 class Solution {
-    public int removeDuplicates(int[] arr) {
-      int j=0;
-      TreeSet<Integer>ts=new TreeSet<>();
-	  
-      for(int val:arr)
-        ts.add(val);
-      
-         
-      for(int val :arr)
-         if(ts.contains(val))
-         {
-            arr[j++]=val;
-            ts.remove(val);
-         }
+    public int removeDuplicates(int[] nums) {
+        // set:
+        LinkedHashSet<Integer> st = new LinkedHashSet<>();
+        for(int i : nums) 
+            st.add(i);
         
-      return j;
+        int j = 0;
+        for(int i : st) {
+            nums[j++] = i;
+        }
+        return st.size();
     }
 }
