@@ -1,21 +1,20 @@
 class Solution {
     public int findDuplicate(int[] nums) {
-        // Approach_03: Using Binary Seacrh : TIme:O(nlogn) and Space:O(1)
-        int low = 0, high = nums.length;
+        int low = 1, high = nums.length-1;
         int duplicate = -1;
-        
-        while(low<=high)
+        while(low <= high)
         {
             int cur = (low+high)/2;
             int cnt = 0;
-            for(int num:nums){
-                if(num <= cur)
+            for(int i:nums){
+                if(i<=cur)
                     cnt++;
             }
-            if(cnt > cur){
+            if(cnt>cur){
                 duplicate = cur;
                 high = cur-1;
-            }else{
+            }
+            else{
                 low = cur+1;
             }
         }
