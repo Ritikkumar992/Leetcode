@@ -1,4 +1,4 @@
-struct point{
+struct Point{
     int x,y,cnt;
 };
 class Solution {
@@ -8,20 +8,19 @@ public:
     int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
         if(grid[0][0] == 1)
             return -1;
-        int row = (int)grid.size();
-        int col = (int)grid[0].size();
+        int row = grid.size();
+        int col = grid[0].size();
         
-        queue<point> q;
+        queue<Point> q;
         q.push({0,0,1});
         grid[0][0] = -1;
-        while(!q.empty())
-        {
-            point p = q.front();
+        
+        while(!q.empty()){
+            Point p = q.front();
             q.pop();
             if(p.x == row-1 && p.y == col-1)
                 return p.cnt;
-            for(int i = 0;i<8;i++)
-            {
+            for(int i = 0;i<8;i++){
                 int x = p.x + dx[i];
                 int y = p.y + dy[i];
                 if(x>=0 && y>=0 && x<row && y<col && grid[x][y] == 0){
