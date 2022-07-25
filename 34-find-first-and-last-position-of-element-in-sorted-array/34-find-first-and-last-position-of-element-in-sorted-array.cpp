@@ -1,24 +1,45 @@
 class Solution {
 public:
-    vector<int> searchRange(vector<int>& nums, int target) {
-        //Brute force: Time:O(n)+O(n) and Space:O(1)
-        int n = nums.size();
-        vector<int> ans;
-        for(int i = 0;i<n;i++){
-            if(nums[i] == target){
-                ans.push_back(i);
-                break;
+    vector<int> searchRange(vector<int>& a, int target) {
+        int s = 0, e = a.size()-1;
+        vector<int> ans(2, -1);
+        //first occurrence
+        while(s <= e){
+            int m = s + (e-s)/2;
+            if(a[m] < target)
+                s = m+1;
+            else if(a[m] > target)
+                e = m-1;
+            else{
+                if(m == s || a[m] != a[m-1]){
+                    ans[0] = m;
+                    break;
+                }
+                else{
+                    e = m-1;
+                    ans[0] = m-1;
+                }
             }
         }
-        for(int j = n-1;j>=0;j--){
-            if(nums[j] == target){
-                ans.push_back(j);
-                break;
+        //last occurrence
+        s = 0, e = a.size()-1;
+        while(s <= e){
+            int m = s + (e-s)/2;
+            if(a[m] < target)
+                s = m+1;
+            else if(a[m] > target)
+                e = m-1;
+            else{
+                if(m == e || a[m] != a[m+1]){
+                    ans[1] = m;
+                    break;
+                }
+                else{
+                    s = m+1;
+                    ans[1] = m+1;
+                }
             }
         }
-        if(ans.size()!=0)
-            return ans;
-        return {-1,-1};
-        
+        return ans; 
     }
 };
