@@ -14,17 +14,25 @@
  * }
  */
 class Solution {
-    TreeNode prev = null;
     public void flatten(TreeNode root) {
-        //Appraoch_01: Recursion:  
-        if(root == null)
+        //Approach_02: Using Stack: TIme:O(n) and Space:O(n)
+        if (root == null) 
             return;
-        flatten(root.right);
-        flatten(root.left);
-        
-        root.right = prev;
-        root.left = null;
-        
-        prev = root;
+        Stack<TreeNode> st = new Stack<>();
+        st.push(root);
+        while (!st.isEmpty()) {
+            TreeNode  cur = st.peek();
+            st.pop();
+            if(cur.right != null) {
+                st.push(cur.right);
+            }
+            if(cur.left != null) {
+                st.push(cur.left);
+            }
+            if (!st.isEmpty()) {
+                cur.right = st.peek();
+            }
+            cur.left = null;
+        }
     }
 }
