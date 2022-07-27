@@ -10,26 +10,17 @@
  * };
  */
 class Solution {
+    TreeNode* prev = NULL;
 public:
     void flatten(TreeNode* root) {
-        //Approach_02: Using Stack: Time:O(n) and Space:O(n)
-        stack<TreeNode*>st;
         if(root == NULL)
             return;
-        st.push(root);
-        while(!st.empty())
-        {
-            TreeNode* cur = st.top();
-            st.pop();
-            if(cur->right)
-                st.push(cur->right);
-            if(cur->left)
-                st.push(cur->left);
-            
-            if(!st.empty()){
-                cur->right = st.top();
-                cur->left = NULL;
-            }
-        }
+        flatten(root->right);
+        flatten(root->left);
+        
+        root->right = prev;
+        root->left = NULL;
+        
+        prev = root;
     }
 };
