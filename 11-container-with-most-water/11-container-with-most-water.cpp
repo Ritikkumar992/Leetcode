@@ -1,22 +1,21 @@
 class Solution {
 public:
     int maxArea(vector<int>& height) {
-        //Optimized Approach: Time:O(n) and Space:O(1)
         int n = height.size();
-        int i = 0, j= n-1;
+        int i = 0, j = n-1;
+        
         int mx = 0;
         while(i<j)
         {
             int length = min(height[i],height[j]);
             int width = j-i;
             int area = length*width;
-            mx = max(area, mx);
+            mx = max(area,mx);
             
-            if(height[i]<=height[j]){
+            if(height[i]<=height[j])
                 i++;
-            }else{
+            else
                 j--;
-            }
         }
         return mx;
     }
