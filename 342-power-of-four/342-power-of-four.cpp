@@ -1,19 +1,14 @@
 class Solution {
 public:
     bool isPowerOfFour(int n) {
-        //2.Apporach_02:
-        if(n<1)
+        //3.Apporach_03:Using recursion:
+        if(n==0)
             return false;
-        while(n!=1)
-        {
-            if(n%4 != 0){
-                return false;
-            }
-            else{
-                n/=4;
-            }
+        if(n==1)
+            return true;
+        if(n%4 == 0){
+            return isPowerOfFour(n/4);
         }
-        
-        return true;
+        return false;
     }
 };
