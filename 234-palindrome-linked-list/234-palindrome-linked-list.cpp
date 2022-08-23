@@ -11,16 +11,19 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        //Approach_01:convert the linked list to string and check for palindorme:
-        string s = "";
-        while(head != NULL){
-            s += head->val;
+        //Approach_02:Using Stack Time:O(n) and Space:O(n)
+        stack<ListNode*> st;
+        ListNode* temp = head;
+        while(temp){
+            st.push(temp);
+            temp = temp->next;
+        }
+        while(head){
+            if(head->val != st.top()->val)
+                return false;
+            st.pop();
             head = head->next;
         }
-        string s1 = "";
-        for(int i = s.size()-1;i>=0;i--){
-            s1 += s[i];
-        }
-        return s == s1;
+        return true;
     }
 };
