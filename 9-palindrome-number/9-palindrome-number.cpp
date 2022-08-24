@@ -1,17 +1,14 @@
 class Solution {
 public:
     bool isPalindrome(int x) {
-        //Approach_03: Time:O(n) and Space:O(1)
-        if(x<0 || (x%10 == 0 && x!= 0))
+        if(x<0 || (x%10 == 0 && x!=0))
             return false;
-        
-        int ans = 0;
-        while(x>ans)
+        int rev = 0;
+        while(x>rev)
         {
-            int rem = x%10;
-            ans = ans*10 + rem;
+            rev = rev*10 + x%10;
             x /= 10;
         }
-        return ans == x || x == ans/10;
+        return x == rev || x == rev/10;
     }
 };
