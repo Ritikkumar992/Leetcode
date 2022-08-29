@@ -1,15 +1,16 @@
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        //Approach_01:using set: Time:O(nlogn + n) and Space:O(n)
-        set<int>st;
-        for(auto it:nums){
-            st.insert(it);
+        if(nums.size() == 0)
+            return 0;
+        int i = 0;
+        for(int j = 1;j<nums.size();j++)
+        {
+            if(nums[j] != nums[i]){
+                i++;
+                nums[i] = nums[j];
+            }
         }
-        nums.clear();
-        for(auto i = st.begin(); i != st.end();i++){
-            nums.push_back(*i);
-        }
-        return nums.size();
+        return i+1;
     }
 };
