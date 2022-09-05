@@ -1,14 +1,11 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        map<int,int>mp;
-        for(auto it:nums){
-            mp[it]++;
+        //usign xor:
+        int ans = 0;
+        for(auto x:nums){
+            ans^=x;
         }
-        for(auto i:mp){
-            if(i.second == 1)
-                return i.first;
-        }
-        return -1;
+        return ans;
     }
 };
