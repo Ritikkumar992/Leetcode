@@ -1,18 +1,16 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        //Moore's Voting Algorithm:
-        int cnt = 0; // for tacking the cnt of element:
-        int element = 0; // for which element we are counting:
-        
-        for(auto it:nums)
-        {
-            if(cnt == 0)
-                element = it;
-            if(element == it)
-                cnt +=1 ;
-            else cnt -= 1;
+        int n = nums.size()/2;
+        int cnt = 0;
+        map<int,int>mp;
+        for(auto i:nums){
+            mp[i]++;
         }
-        return element;
+        for(auto m:mp){
+            if(m.second > n)
+                return m.first;
+        }
+        return -1;
     }
 };
