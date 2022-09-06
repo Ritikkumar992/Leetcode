@@ -1,12 +1,9 @@
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
-        //kadane's algorithm: TIme: O(n) and Space:O(1)
-        int mx = INT_MIN;
-        int sum = 0;
-        for(auto it:nums)
-        {
-            sum += it;
+        int sum = 0,mx = INT_MIN;
+        for(int i = 0;i<nums.size();i++){
+            sum += nums[i];
             mx = max(mx,sum);
             if(sum < 0)
                 sum = 0;
