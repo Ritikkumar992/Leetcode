@@ -11,27 +11,19 @@
  */
 class Solution {
 public:
+    void dfs(TreeNode* root, vector<int>&inorder)
+    {
+        if(root == NULL)
+            return;
+        dfs(root->left,inorder);
+        inorder.push_back(root->val);
+        dfs(root->right,inorder);
+    }
+public:
     vector<int> inorderTraversal(TreeNode* root) {
-        //Morris Traversal:
-        vector<int> res;
-        TreeNode* curr = root;
-        TreeNode* pre;
-        
-         while (curr != NULL) {
-            if (curr->left == NULL) {
-                res.push_back(curr->val);
-                curr = curr->right; // move to next right node
-            } else { // has a left subtree
-                pre = curr->left;
-                while (pre->right != NULL) { // find rightmost
-                    pre = pre->right;
-                }
-                pre->right = curr; // put cur after the pre node
-                TreeNode* temp = curr; // store cur node
-                curr = curr->left; // move cur to the top of the new tree
-                temp->left = NULL; // original cur left be null, avoid infinite loops
-            }
-        }
-        return res;
+        //approach_01:using recursion: Time:O(n) and Space:O(n)
+        vector<int> inorder;
+        dfs(root,inorder);
+        return inorder;
     }
 };
