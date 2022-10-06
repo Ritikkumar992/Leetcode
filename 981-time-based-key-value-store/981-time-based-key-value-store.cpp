@@ -24,3 +24,9 @@ public:
         return start > 0 and start <= m[key].size() ? m[key][start-1].second : "";
     }
 };
+/**
+ * Your TimeMap object will be instantiated and called as such:
+ * TimeMap* obj = new TimeMap();
+ * obj->set(key,value,timestamp);
+ * string param_2 = obj->get(key,timestamp);
+ */
