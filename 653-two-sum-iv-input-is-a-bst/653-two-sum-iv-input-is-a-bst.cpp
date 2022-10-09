@@ -12,19 +12,28 @@
 class Solution {
 public:
     bool findTarget(TreeNode* root, int k) {
-        //Approach_03: Using Binary Seach on each node.
-        return dfs(root, root, k);
+        //Time:O(n) and Space:O(n)
+        vector<int> ans;
+        inorder(root, ans);
+        
+        int  i = 0, j = ans.size()-1;
+        while(i<j)
+        {
+            if(ans[i]+ans[j] == k)
+                return true;
+            else if(ans[i] + ans[j] > k)
+                j--;
+            else
+                i++;
+        }
+        return false;
     }
-    bool dfs(TreeNode* root, TreeNode* curr, int k)
+    void inorder(TreeNode* root, vector<int>&ans)
     {
-        if(curr == NULL)
-            return false;
-        return search(root, curr, k-curr->val) || dfs(root, curr->left, k) || dfs(root, curr->right, k);
-    }
-     bool search(TreeNode* root, TreeNode *cur, int value){
-        if(root == NULL)return false;
-        return (root->val == value) && (root != cur) 
-            || (root->val < value) && search(root->right, cur, value) 
-                || (root->val > value) && search(root->left, cur, value);
+        if(root == NULL)
+            return;
+        inorder(root->left,ans);
+        ans.push_back(root->val);
+        inorder(root->right,ans);
     }
 };
