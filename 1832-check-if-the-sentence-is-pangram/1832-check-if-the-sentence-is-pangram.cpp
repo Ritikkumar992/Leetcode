@@ -1,10 +1,15 @@
 class Solution {
 public:
     bool checkIfPangram(string sentence) {
-        unordered_set<char> st;
+        array<bool,26>seen{};
         for(auto s:sentence){
-            st.insert(s);
+            seen[s-'a'] = true;
         }
-        return st.size() == 26;
+        for(auto status:seen){
+            if(!status){
+                return false;
+            }
+        }
+        return true;
     }
 };
