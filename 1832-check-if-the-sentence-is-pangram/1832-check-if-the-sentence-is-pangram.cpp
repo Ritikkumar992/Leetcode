@@ -1,13 +1,10 @@
 class Solution {
 public:
     bool checkIfPangram(string sentence) {
-        for(int i = 0;i<26;i++){
-            char currChar = 'a'+i;
-            
-            if(sentence.find(currChar) == string::npos){
-                return false;
-            }
+        unordered_set<char> st;
+        for(auto s:sentence){
+            st.insert(s);
         }
-        return true;
+        return st.size() == 26;
     }
 };
