@@ -15,15 +15,25 @@
  */
 class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
-        //Recursive Approach:
-        if(p == null && q == null)
-            return true;
-        if(p == null || q == null)
-            return false;
-        if(p.val != q.val)
-            return false;
-        // Recursively check the left and right subtrees of p and q
-        // If both the left and right subtrees are the same, then p and q are the same tree
-        return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
+        //Iterative Approach:
+        Deque<TreeNode> dq = new LinkedList<TreeNode>();
+        dq.add(p);
+        dq.add(q);
+        
+        while(!dq.isEmpty())
+        {
+            p = dq.poll();
+            q = dq.poll();
+            
+            if(p == null && q == null) continue;
+            if(p == null || q == null) return false;
+            if(p.val != q.val) return false;
+            
+            dq.add(p.left);
+            dq.add(q.left);
+            dq.add(p.right);
+            dq.add(q.right);
+        }
+        return true;
     }
 }
