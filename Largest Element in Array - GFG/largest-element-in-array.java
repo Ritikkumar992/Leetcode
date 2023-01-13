@@ -38,10 +38,7 @@ class Compute {
     
     public int largest(int arr[], int n)
     {
-        int mx =  arr[0];
-        for(int i = 1;i<n;i++){
-            mx = Math.max(mx,arr[i]);
-        }
-        return mx;
+        Arrays.sort(arr);
+        return arr[n-1];
     }
 }
