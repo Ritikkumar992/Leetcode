@@ -1,13 +1,25 @@
 class Solution {
     public int findDuplicate(int[] nums) {
-        //negativ marking method: time"O(n) and space:O(1)
-        for(int i = 0;i<nums.length;i++){
-            int curr = Math.abs(nums[i]);
-            if(nums[curr] < 0)
-                return curr;
-            else
-                nums[curr] *= -1;
+        //binarySearch: time:O(nlogn) and space:O(1)
+        int low = 1, high = nums.length-1;
+        int duplicate = -1;
+        while(low <= high)
+        {
+            int curr = (low+high)/2;
+            int cnt = 0;
+            for(int n:nums){
+                if(n <= curr){
+                    cnt++;
+                }
+            }
+            if(cnt > curr){
+                duplicate = curr;
+                high = curr-1;
+            }
+            else{
+                low = curr+1;
+            }
         }
-        return -1;
+        return duplicate;
     }
 }
