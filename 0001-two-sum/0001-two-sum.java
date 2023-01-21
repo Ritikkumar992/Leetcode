@@ -1,19 +1,16 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        //brute force: time-> o(n^2) and space:O(n)
-        int n = nums.length;
-        int x = 0;
-        int []arr = new int[2];
-        
-        for(int i = 0;i<n;i++){
-            for(int j = i+1;j<n;j++){
-                if(nums[i]+nums[j] == target){
-                    arr[x++] = i;
-                    arr[x++] = j;
-                    // x++;
-                }
+        //using hashmap: time:o(n) and space:O(1)
+        int []res = new int[2];
+        Map<Integer,Integer>mp = new HashMap<>();
+        for(int i = 0;i<nums.length;i++)
+        {
+            if(mp.containsKey(target-nums[i])){
+                res[0] = i;
+                res[1] = mp.get(target-nums[i]);
             }
+            mp.put(nums[i], i);
         }
-        return arr;
+        return res;
     }
 }
