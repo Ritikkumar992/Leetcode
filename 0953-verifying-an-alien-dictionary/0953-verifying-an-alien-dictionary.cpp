@@ -1,11 +1,29 @@
+unordered_map<char, int> m;
+
+bool cmp(string a, string b){
+    int n = min(a.length(), b.length());
+    for(int i = 0; i < n; i++){
+        if(m[a[i]] < m[b[i]]){
+            return true;
+        }
+        else if(m[a[i]] > m[b[i]]){
+            return false;
+        }
+    }
+    if(a.length() <= b.length()){
+        return true;
+    }
+    return false;
+}
+
 class Solution {
 public:
-    unordered_map<char, char> mp;
-bool isAlienSorted(vector<string>& words, string order) {        
-	// Infact, we can do without the + 'a' below as well. It just won't map to English but rather to characters having ascii 0,1,2...
-	for(int i = 0; i < size(order); i++) mp[order[i]] = i + 'a';  
-	for(auto& word : words)
-		for(auto& c : word) c = mp[c];
-	return is_sorted(begin(words), end(words));
-} 
+    bool isAlienSorted(vector<string>& words, string order) {
+        for(int i = 0; i < order.length(); i++){
+            m[order[i]] = i;
+        }
+        vector<string> temp = words;
+        sort(temp.begin(), temp.end(), cmp);
+        return temp == words;
+    }
 };
