@@ -5,31 +5,24 @@ using namespace std;
 
 // } Driver Code Ends
 class Solution {
-    int fun(vector<int>&height,int ind, vector<int>&dp)
-    {
-        // Code here
-        
-        // recursive apporach to memoization: time:O(n) and space:O(n) + O(n)
-        if(ind == 0){
-            return 0;
-        }
-        if(dp[ind] != -1){
-            return dp[ind];
-        }
-        int left_recursion = fun(height,ind-1,dp) + abs(height[ind]-height[ind-1]);
-        int right_recursion = INT_MAX;
-        if(ind > 1){
-            right_recursion = fun(height,ind-2,dp) + abs(height[ind] - height[ind-2]);
-        }
-        // return min(left_recursion, right_recursion);
-        return dp[ind] = min(left_recursion, right_recursion);
-    }
   public:
     int minimumEnergy(vector<int>& height, int n) {
+        // Code here
+        
+        // memoization to tabulation.
         vector<int> dp(n+1, -1);
-        return fun(height,n-1,dp);
+        dp[0] = 0;
+        for(int i = 1;i<n;i++){
+            int jumpTwo = INT_MAX;
+            int jumpOne = dp[i-1] + abs(height[i] - height[i-1]);
+            
+            if(i>1){
+                jumpTwo = dp[i-2] + abs(height[i] - height[i-2]);
+            }
+            dp[i] = min(jumpOne ,jumpTwo);
+        }
+        return dp[n-1];
     }
-    
 };
 
 //{ Driver Code Starts.
