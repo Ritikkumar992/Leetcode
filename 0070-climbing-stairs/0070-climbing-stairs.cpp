@@ -1,18 +1,14 @@
 class Solution {
-    int helper(int n , vector<int>&dp){
-        // base case:
-        if(n<=1)
-            return 1;
-        if(dp[n] != -1)
-            return dp[n];
-        return dp[n] = helper(n-1, dp)+helper(n-2,dp);
-    }
 public:
     int climbStairs(int n) {
-        // recursive appraoch to memoization => time: O(n) and space:e O(n) + O(n)
+        // recursive appraoch to tabulation => time: O(n) and space: O(n)
         vector<int> dp(n+1, -1);
+        dp[0] = 1;
+        dp[1] = 1;
         
-        int ans = helper(n, dp);
-        return ans;
+        for(int i = 2;i<=n;i++){
+            dp[i] = dp[i-1]+dp[i-2];
+        }
+        return dp[n];
     }
 };
