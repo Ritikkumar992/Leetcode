@@ -14,6 +14,7 @@ public:
         return dp[i][j] =  min(down, diagonal);
     }
     int minimumTotal(vector<vector<int>>& triangle) {
+        // memoization : time:O(n*m) and space:O(n) + O(n*m)
         int n = triangle.size();
         vector<vector<int>> dp(n, vector<int>(n,-1));
         return fun(0,0,triangle,n,dp);
