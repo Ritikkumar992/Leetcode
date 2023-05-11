@@ -18,7 +18,7 @@ public:
         return dp[i][j] =  min(up, min(leftDiagonal, rightDiagonal));
     }
     int minFallingPathSum(vector<vector<int>>& matrix) {
-        // Memoization: time: exponential and space:O(n)
+        // Memoization: time:  O(N*N) and space: O(N) + O(N*M)
         //   row                   col
         int n = matrix.size(), m = matrix[0].size();
         vector<vector<int>> dp(n,vector<int>(m,-1));
