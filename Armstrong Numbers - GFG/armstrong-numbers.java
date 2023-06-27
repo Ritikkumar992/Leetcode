@@ -21,21 +21,21 @@ class GFG {
 //User function Template for Java
 class Solution {
     static String armstrongNumber(int n){
-        int temp = n;
-        int ans = 0;
+        // code here
+        int temp = n, ans = 0;
         while(temp != 0)
         {
             int digit = temp%10;
-            ans += digit*digit*digit;
+            int cube = digit*digit*digit;
+            ans += cube;
+            
             temp /= 10;
         }
-        String s = "";
         if(ans == n){
-            s = "Yes";
+            return "Yes";
         }
         else{
-            s = "No";
+            return "No";
         }
-        return s;
     }
 }
