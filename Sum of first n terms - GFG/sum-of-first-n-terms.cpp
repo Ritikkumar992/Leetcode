@@ -18,8 +18,8 @@ class Solution {
             return 0;
         }
         sum += cube(N);
-        
-        return sum + sumOfSeries(N-1);;
+        long long ans = sum + sumOfSeries(N-1);
+        return ans;
     }
 };
 
