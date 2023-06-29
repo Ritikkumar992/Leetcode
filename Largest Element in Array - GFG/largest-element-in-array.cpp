@@ -19,8 +19,10 @@ public:
         //     }
         // }
         // return mx;
-        int mx = *max_element(arr.begin(),arr.end());
-        return mx;
+        // int mx = *max_element(arr.begin(),arr.end());
+        // return mx;
+        sort(arr.begin(),arr.end());
+        return arr[arr.size()-1];
     }
 };
 
