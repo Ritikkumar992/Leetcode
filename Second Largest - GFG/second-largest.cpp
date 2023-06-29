@@ -17,14 +17,28 @@ public:
 	   // }
 	   // return second_mx;
 	   
-	   sort(arr, arr+n);
-	   for(int i = n-1;i>0;i--)
+	   //sort(arr, arr+n);
+	   //for(int i = n-1;i>0;i--)
+	   //{
+	   //    if(arr[i] != arr[i-1]){
+	   //        return arr[i-1];
+	   //    }
+	   //}
+	   //return -1;
+	   
+	   int large = -1;
+	   int second_large = -1;
+	   for(int i = 0;i<n;i++)
 	   {
-	       if(arr[i] != arr[i-1]){
-	           return arr[i-1];
+	       if(arr[i] > large){
+	           second_large = large;
+	           large = arr[i];
+	       }
+	       else if(arr[i] > second_large && arr[i] != large){
+	           second_large = arr[i];
 	       }
 	   }
-	   return -1;
+	   return second_large;
 	}
 };
 
