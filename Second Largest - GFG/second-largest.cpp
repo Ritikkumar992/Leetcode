@@ -8,14 +8,23 @@ using namespace std;
 class Solution{
 public:	
 	int print2largest(int arr[], int n) {
-	    int mx = *max_element(arr,arr+n);
-	    int second_mx = -1;
-	    for(int i = 0;i<n;i++){
-	        if(arr[i] < mx && arr[i] > second_mx){
-	            second_mx = arr[i];
-	        }
-	    }
-	    return second_mx;
+	   // int mx = *max_element(arr,arr+n);
+	   // int second_mx = -1;
+	   // for(int i = 0;i<n;i++){
+	   //     if(arr[i] < mx && arr[i] > second_mx){
+	   //         second_mx = arr[i];
+	   //     }
+	   // }
+	   // return second_mx;
+	   
+	   sort(arr, arr+n);
+	   for(int i = n-1;i>0;i--)
+	   {
+	       if(arr[i] != arr[i-1]){
+	           return arr[i-1];
+	       }
+	   }
+	   return -1;
 	}
 };
 
