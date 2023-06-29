@@ -10,19 +10,30 @@ using namespace std;
 
 class Solution{
 public:
-    int remove_duplicate(int a[],int n){
+    int remove_duplicate(int arr[],int n){
         
         // Approach_01: brute force: using set : time:O(nlogn) + O(n)
-        set<int> st;
-        for(int i = 0;i<n;i++){
-            st.insert(a[i]);
+        // set<int> st;
+        // for(int i = 0;i<n;i++){
+        //     st.insert(a[i]);
+        // }
+        // int k = st.size();
+        // int j = 0;
+        // for(auto s:st){
+        //     a[j++] = s;
+        // }
+        // return k;
+        
+        // Approach_02: 
+        int i = 0;
+        for(int j = 1;j<n;j++)
+        {
+            if(arr[i] != arr[j]){
+                i++;
+                arr[i] = arr[j];
+            }
         }
-        int k = st.size();
-        int j = 0;
-        for(auto s:st){
-            a[j++] = s;
-        }
-        return k;
+        return i+1;
     }
 };
 
