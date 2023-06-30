@@ -25,16 +25,10 @@ int main()
 
 int missingNumber(int A[], int N)
 {
-    int hashMap[N+1] = {0};
-    for(int i = 0;i<N-1;i++)
-    {
-        hashMap[A[i]]++;
+    int sum1 = (N*(N+1))/2;
+    int sum2 = 0;
+    for(int i = 0;i<N-1;i++){
+        sum2 += A[i];
     }
-    for(int i = 1;i<=N;i++)
-    {
-        if(hashMap[i] == 0){
-            return i;
-        }
-    }
-    return -1;
+    return sum1-sum2;
 }
