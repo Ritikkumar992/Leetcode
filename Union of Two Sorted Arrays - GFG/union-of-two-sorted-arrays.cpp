@@ -9,19 +9,20 @@ class Solution{
     
     vector<int> findUnion(int arr1[], int arr2[], int n, int m)
     {
-        map<int,int> mp;
+        set<int> st;
         vector<int> ans;
         
         for(int i = 0;i<n;i++){
-            mp[arr1[i]]++;
+            st.insert(arr1[i]);
         }
         for(int i = 0;i<m;i++){
-            mp[arr2[i]]++;
+            st.insert(arr2[i]);
         }
         
-        for(auto m:mp){
-            ans.push_back(m.first);
+        for(auto s:st){
+            ans.push_back(s);
         }
+        
         return ans;
     }
 };
