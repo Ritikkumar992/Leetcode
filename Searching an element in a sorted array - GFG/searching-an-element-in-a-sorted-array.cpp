@@ -10,13 +10,21 @@ class Solution{
     // arr: input array
     // N: size of array
     // K: element to be searche
-    int searchInSorted(int arr[], int N, int K) 
+    int searchInSorted(int arr[], int N, int k) 
     { 
     
-       // Your code here
-       for(int i = 0;i<N;i++)
+       // using binary search:
+       int low = 0, high= N-1;
+       while(low <= high)
        {
-           if(arr[i] == K){
+           int mid = (low+high)/2;
+           if(arr[mid] < k){
+               low = mid+1;
+           }
+           else if(arr[mid] > k){
+               high = mid-1;
+           }
+           else if(arr[mid] == k){
                return 1;
            }
        }
