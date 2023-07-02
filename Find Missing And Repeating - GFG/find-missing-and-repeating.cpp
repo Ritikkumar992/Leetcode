@@ -20,6 +20,9 @@ public:
             else if(hash[i] == 0){
                 missing = i;
             }
+            if(repeating != -1 && missing != -1){
+                break;
+            }
         }
         return {repeating, missing};
     }
