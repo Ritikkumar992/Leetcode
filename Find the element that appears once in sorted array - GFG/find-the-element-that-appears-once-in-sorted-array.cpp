@@ -9,14 +9,22 @@ using namespace std;
 class Solution
 {
   public:
-    int findOnce(int arr[], int n)
+    int findOnce(int nums[], int n)
     {
-        //code here.
-        int ele = 0;
-        for(int i = 0;i<n;i++){
-            ele = ele^arr[i];
+        int low = 0;
+        int high = n-1;
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+
+            // Check if mid is the start of a pair
+            if (nums[mid] == nums[mid ^ 1])
+                low = mid + 1;
+            else
+                high = mid;
         }
-        return ele;
+
+        return nums[low];
     }
 };
 
