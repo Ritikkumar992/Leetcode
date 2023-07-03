@@ -1,33 +1,25 @@
 class Solution {
 public:
     int findMin(vector<int>& nums) {
-        int low = 0, high = nums.size()-1;
-        
-        if(nums.size() == 1)
-            return nums[0];
-        
-        //if the last ele is greater than the first ele then there is no rotation;
-        //hence smallest elem is the first element:
-        if(nums[high] > nums[0])
-            return nums[0];
-        //binary search logic:
-        while(high >= low)
+        int n = nums.size();
+        int ans = INT_MAX;
+        int low = 0, high = n-1;
+        while(low <= high)
         {
             int mid = low + (high-low)/2;
-            if(nums[mid] > nums[mid+1])
-                return nums[mid+1];
-            if(nums[mid-1] > nums[mid])
-                return nums[mid];
-            
-            //if the mid ele value is greater than the 0th ele this means the least value is still
-            // somewhere to the right as we still dealing with the elm greater than 
-            if(nums[mid] > nums[0]){
-                low = mid+1;
+            // left part is sorted;
+            if(nums[low] <= nums[mid])
+            {
+                ans = min(ans, nums[low]);
+                low = mid+1; // eliminate left part.
             }
-            else{
-                high = mid-1;
+            // right part is sorted.
+            else
+            {
+                ans = min(ans, nums[mid]);
+                high = mid-1; // elminate right half.
             }
         }
-        return INT_MAX;
+        return ans;
     }
 };
