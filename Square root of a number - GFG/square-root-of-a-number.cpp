@@ -11,7 +11,18 @@ class Solution{
   public:
     long long int floorSqrt(long long int x) 
     {
-        return sqrt(x);   
+          // Linear Search:
+        long long int ans = 0;
+        for(long long int i= 1;i<=x;i++)
+        {
+            if(i*i <= x * 1ll){
+                ans = i;
+            }
+            else{
+                break;
+            }
+        }
+        return ans;
     }
 };
 
