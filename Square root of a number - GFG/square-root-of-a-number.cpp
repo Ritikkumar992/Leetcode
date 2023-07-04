@@ -11,7 +11,7 @@ class Solution{
   public:
     long long int floorSqrt(long long int x) 
     {
-          // Linear Search:
+         // Linear Search:
         // long long int ans = 0;
         // for(long long int i= 1;i<=x;i++)
         // {
@@ -24,7 +24,24 @@ class Solution{
         // }
         // return ans;
         
-        long long int ans = sqrt(x);
+        // long long int ans = sqrt(x);
+        // return ans;
+        
+        // Binary Search:
+        long long int ans = 0;
+        long long int low = 1, high = x;
+        
+        while(low <= high)
+        {
+            long long int mid = low + (high-low)/2;
+            if(mid *mid <= x){
+                ans = mid;
+                low = mid+1;
+            }
+            else{
+                high = mid-1;
+            }
+        }
         return ans;
     }
 };
