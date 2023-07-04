@@ -12,16 +12,19 @@ class Solution{
     long long int floorSqrt(long long int x) 
     {
           // Linear Search:
-        long long int ans = 0;
-        for(long long int i= 1;i<=x;i++)
-        {
-            if(i*i <= x * 1ll){
-                ans = i;
-            }
-            else{
-                break;
-            }
-        }
+        // long long int ans = 0;
+        // for(long long int i= 1;i<=x;i++)
+        // {
+        //     if(i*i <= x * 1ll){
+        //         ans = i;
+        //     }
+        //     else{
+        //         break;
+        //     }
+        // }
+        // return ans;
+        
+        long long int ans = sqrt(x);
         return ans;
     }
 };
