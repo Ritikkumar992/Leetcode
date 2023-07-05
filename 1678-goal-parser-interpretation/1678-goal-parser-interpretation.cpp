@@ -1,20 +1,21 @@
 class Solution {
 public:
-    string interpret(string s) {
-        unordered_map<string, string> d = 
+    string interpret(string command) {
+        unordered_map<string, string> mp = 
         {
-            { "(al)" , "al"},
-            { "()" , "o" }, 
-            { "G" , "G" },
+            {"(al)", "al"},
+            {"()", "o"},
+            {"G", "G"},
         };
-        string tmp = "", res = "";
-        for(char c: s){
-            tmp+=c;
-            if(d.find(tmp)!=d.end()){
-                res += d[tmp] ;
-                tmp = "" ;
+        string temp = "", ans = "";
+        for(char c:command)
+        {
+            temp += c;
+            if(mp.find(temp) != mp.end()){
+                ans += mp[temp];
+                temp = "";
             }
         }
-        return res;
+        return ans;
     }
 };
