@@ -7,21 +7,12 @@ class Solution {
   public:
     string maxOdd(string num) {
         
-        int n = num.size();
-        int i = n-1;
-        string ans = "";
-        while(i>=0)
+        for(int i = num.size();i>=0;i--)
         {
-            if(num[i]%2 != 0){
-                ans += num[i];
-            }
-            if(num[i]%2 == 0 && ans[0]%2 != 0){
-                ans += num[i];
-            }
-            i--;
+            if((num[i] - '0')%2)
+                return num.substr(0,i+1);
         }
-        reverse(ans.begin(),ans.end());
-        return ans;
+        return string();
         
     }
 };
