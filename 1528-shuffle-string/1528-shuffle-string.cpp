@@ -1,11 +1,15 @@
 class Solution {
 public:
     string restoreString(string s, vector<int>& indices) {
-        string ans = s;
-        for(int i =0;i<s.size();i++)
+        const int n = s.size();
+        for(int i= 0;i<n;i++)
         {
-            ans[indices[i]] = s[i];
+            while(indices[i] != i)
+            {
+                swap(s[i], s[indices[i]]);
+                swap(indices[i], indices[indices[i]]);
+            }
         }
-        return ans;
+        return s;
     }
 };
