@@ -8,7 +8,9 @@ public:
             i = 1;
         if(ruleKey == "name")
             i = 2;
+        
         int ans = 0;
+        
         for(int j = 0;j<items.size();j++)
         {
             if(items[j][i] == ruleValue)
