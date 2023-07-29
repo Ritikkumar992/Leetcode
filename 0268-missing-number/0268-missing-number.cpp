@@ -2,13 +2,12 @@ class Solution {
 public:
     int missingNumber(vector<int>& nums) {
         int n = nums.size();
-        vector<int> hashMap(n+1, 0);
-        
-        for(int i = 0;i<n;i++){
-            hashMap[nums[i]]++;
+        vector<int> hash(n+1,0);
+        for(auto num:nums){
+            hash[num]++;
         }
-        for(int i = 1;i<hashMap.size();i++){
-            if(hashMap[i] == 0){
+        for(int i = 1;i<=n;i++){
+            if(hash[i] == 0){
                 return i;
             }
         }
