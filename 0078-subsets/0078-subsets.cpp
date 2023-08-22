@@ -6,12 +6,13 @@ public:
             ans.push_back(temp);
             return;
         }
-        // not pick:
-        solve(ind+1, nums, temp, ans);
         // pick:
         temp.push_back(nums[ind]);
         solve(ind+1, nums, temp, ans);
         temp.pop_back();
+        
+        // not pick:
+        solve(ind+1, nums, temp, ans);
     }
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
