@@ -1,35 +1,28 @@
 class Solution {
-    // Time : 2^k * k.
-    // Space: k * x
 public:
-    void findCombination(int ind, int target, vector<int> &arr, vector<vector<int>>&ans, vector<int> &ds)
+    void solve(int ind, int tar,vector<int>&arr, vector<int>& ds,vector<vector<int>>&ans)
     {
-        //base case:
+        // base case:
         if(ind == arr.size()){
-            if(target == 0){
+            if(tar == 0){
                 ans.push_back(ds);
             }
             return;
         }
-        //pick up the element:
-        if(arr[ind] <= target)
-        {
+        // pick case:
+        if(arr[ind] <= tar){
             ds.push_back(arr[ind]);
-            findCombination(ind, target-arr[ind], arr, ans, ds);
-            
+            solve(ind, tar-arr[ind],arr,ds,ans);
             ds.pop_back();
         }
-        //not pick an element;
-        findCombination(ind+1, target, arr, ans, ds);
+        // non-pick case:
+        solve(ind+1,tar,arr,ds,ans);
     }
 public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        // creating vector of vector to store our ans:
         vector<vector<int>> ans;
-        //creating a vector to store a particular combination:
         vector<int> ds;
-        findCombination(0,target,candidates, ans, ds);
-        
+        solve(0, target, candidates,ds, ans);
         return ans;
     }
 };
